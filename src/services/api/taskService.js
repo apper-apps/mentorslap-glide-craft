@@ -2,7 +2,7 @@ import mockData from '@/services/mockData/tasks.json';
 
 class TaskService {
   constructor() {
-    this.tasks = [...mockData];
+    this.tasks = [...mockData.mockData];
   }
 
   async getAll() {
