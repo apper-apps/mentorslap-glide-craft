@@ -1,34 +1,123 @@
-import mockBadges from '@/services/mockData/badges.json';
+import { toast } from 'react-toastify';
 
 class BadgeService {
   constructor() {
-    this.badges = [...mockBadges];
-    this.userBadges = []; // Badges earned by user
+    this.tableName = 'badge';
+    this.apperClient = null;
+    this.initializeClient();
+    this.userBadges = []; // Temporary storage for user badges
+  }
+
+  initializeClient() {
+    if (typeof window !== 'undefined' && window.ApperSDK) {
+      const { ApperClient } = window.ApperSDK;
+      this.apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+    }
   }
 
   async getAll() {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    return [...this.badges];
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "description" } },
+          { field: { Name: "icon" } },
+          { field: { Name: "rarity" } },
+          { field: { Name: "requirement" } },
+          { field: { Name: "category" } }
+        ],
+        orderBy: [
+          { fieldName: "Name", sorttype: "ASC" }
+        ]
+      };
+
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
+      }
+
+      if (!response.data || response.data.length === 0) {
+        return [];
+      }
+
+      return response.data.map(badge => ({
+        Id: badge.Id,
+        name: badge.Name,
+        description: badge.description,
+        icon: badge.icon,
+        rarity: badge.rarity,
+        requirement: badge.requirement,
+        category: badge.category
+      }));
+    } catch (error) {
+      console.error("Error fetching badges:", error);
+      toast.error("Failed to load badges");
+      return [];
+    }
   }
 
   async getById(id) {
-    await new Promise(resolve => setTimeout(resolve, 150));
-    const badge = this.badges.find(b => b.Id === parseInt(id));
-    if (!badge) {
-      throw new Error('Badge not found');
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "description" } },
+          { field: { Name: "icon" } },
+          { field: { Name: "rarity" } },
+          { field: { Name: "requirement" } },
+          { field: { Name: "category" } }
+        ]
+      };
+
+      const response = await this.apperClient.getRecordById(this.tableName, parseInt(id), params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (!response.data) {
+        return null;
+      }
+
+      const badge = response.data;
+      return {
+        Id: badge.Id,
+        name: badge.Name,
+        description: badge.description,
+        icon: badge.icon,
+        rarity: badge.rarity,
+        requirement: badge.requirement,
+        category: badge.category
+      };
+    } catch (error) {
+      console.error(`Error fetching badge with ID ${id}:`, error);
+      toast.error("Failed to load badge");
+      return null;
     }
-    return { ...badge };
   }
 
   async getUserBadges() {
-    await new Promise(resolve => setTimeout(resolve, 200));
+    // For now, return local user badges
+    // In a real implementation, this would query a user_badges table
     return [...this.userBadges];
   }
 
   async awardBadge(badgeId) {
-    await new Promise(resolve => setTimeout(resolve, 250));
+    // Check if badge already awarded
     if (!this.userBadges.find(b => b.badgeId === badgeId)) {
-      const badge = this.badges.find(b => b.Id === badgeId);
+      const badge = await this.getById(badgeId);
       if (badge) {
         this.userBadges.push({
           Id: this.userBadges.length + 1,
@@ -44,8 +133,7 @@ class BadgeService {
 
   async checkMilestones(tasks) {
     const completedTasks = tasks.filter(task => task.status === 'done');
-    const totalXP = completedTasks.reduce((sum, task) => sum + task.xpValue, 0);
-    const currentLevel = Math.floor(totalXP / 200) + 1;
+    const totalXP = completedTasks.reduce((sum, task) => sum + (task.xpValue || task.xp_value || 0), 0);
     
     const newBadges = [];
     
@@ -92,14 +180,14 @@ class BadgeService {
   checkConsecutiveCompletion(tasks) {
     const sortedTasks = tasks
       .filter(task => task.status === 'done')
-      .sort((a, b) => new Date(b.completedAt || b.createdAt) - new Date(a.completedAt || a.createdAt));
+      .sort((a, b) => new Date(b.completedAt || b.createdAt || Date.now()) - new Date(a.completedAt || a.createdAt || Date.now()));
     
     let consecutive = 0;
     for (let i = 0; i < sortedTasks.length; i++) {
       consecutive++;
       if (i < sortedTasks.length - 1) {
-        const current = new Date(sortedTasks[i].completedAt || sortedTasks[i].createdAt);
-        const next = new Date(sortedTasks[i + 1].completedAt || sortedTasks[i + 1].createdAt);
+        const current = new Date(sortedTasks[i].completedAt || sortedTasks[i].createdAt || Date.now());
+        const next = new Date(sortedTasks[i + 1].completedAt || sortedTasks[i + 1].createdAt || Date.now());
         const daysDiff = Math.abs(current - next) / (1000 * 60 * 60 * 24);
         
         if (daysDiff > 1) break;
@@ -110,35 +198,168 @@ class BadgeService {
   }
 
   async create(badgeData) {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    const newId = Math.max(...this.badges.map(b => b.Id), 0) + 1;
-    const newBadge = {
-      Id: newId,
-      ...badgeData,
-      createdAt: new Date().toISOString()
-    };
-    this.badges.push(newBadge);
-    return { ...newBadge };
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        records: [{
+          Name: badgeData.name || badgeData.Name || 'New Badge',
+          description: badgeData.description || '',
+          icon: badgeData.icon || 'Award',
+          rarity: badgeData.rarity || 'common',
+          requirement: badgeData.requirement || '',
+          category: badgeData.category || 'milestone'
+        }]
+      };
+
+      const response = await this.apperClient.createRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+
+        if (successfulRecords.length > 0) {
+          const newBadge = successfulRecords[0].data;
+          return {
+            Id: newBadge.Id,
+            name: newBadge.Name,
+            description: newBadge.description,
+            icon: newBadge.icon,
+            rarity: newBadge.rarity,
+            requirement: newBadge.requirement,
+            category: newBadge.category
+          };
+        }
+      }
+
+      throw new Error('No successful records created');
+    } catch (error) {
+      console.error("Error creating badge:", error);
+      toast.error("Failed to create badge");
+      throw error;
+    }
   }
 
-  async update(id, updateData) {
-    await new Promise(resolve => setTimeout(resolve, 250));
-    const index = this.badges.findIndex(b => b.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error('Badge not found');
+  async update(id, badgeData) {
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const updateFields = {
+        Id: parseInt(id)
+      };
+
+      if (badgeData.name !== undefined) {
+        updateFields.Name = badgeData.name;
+      }
+      if (badgeData.description !== undefined) updateFields.description = badgeData.description;
+      if (badgeData.icon !== undefined) updateFields.icon = badgeData.icon;
+      if (badgeData.rarity !== undefined) updateFields.rarity = badgeData.rarity;
+      if (badgeData.requirement !== undefined) updateFields.requirement = badgeData.requirement;
+      if (badgeData.category !== undefined) updateFields.category = badgeData.category;
+
+      const params = {
+        records: [updateFields]
+      };
+
+      const response = await this.apperClient.updateRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulUpdates = response.results.filter(result => result.success);
+        const failedUpdates = response.results.filter(result => !result.success);
+        
+        if (failedUpdates.length > 0) {
+          console.error(`Failed to update ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`);
+          
+          failedUpdates.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+
+        if (successfulUpdates.length > 0) {
+          const updatedBadge = successfulUpdates[0].data;
+          return {
+            Id: updatedBadge.Id,
+            name: updatedBadge.Name,
+            description: updatedBadge.description,
+            icon: updatedBadge.icon,
+            rarity: updatedBadge.rarity,
+            requirement: updatedBadge.requirement,
+            category: updatedBadge.category
+          };
+        }
+      }
+
+      throw new Error('No successful updates completed');
+    } catch (error) {
+      console.error("Error updating badge:", error);
+      toast.error("Failed to update badge");
+      throw error;
     }
-    this.badges[index] = { ...this.badges[index], ...updateData };
-    return { ...this.badges[index] };
   }
 
   async delete(id) {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    const index = this.badges.findIndex(b => b.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error('Badge not found');
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await this.apperClient.deleteRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return false;
+      }
+
+      if (response.results) {
+        const successfulDeletions = response.results.filter(result => result.success);
+        const failedDeletions = response.results.filter(result => !result.success);
+        
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`);
+          
+          failedDeletions.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+
+        return successfulDeletions.length === 1;
+      }
+
+      return false;
+    } catch (error) {
+      console.error("Error deleting badge:", error);
+      toast.error("Failed to delete badge");
+      return false;
     }
-    this.badges.splice(index, 1);
-    return true;
   }
 }
 
