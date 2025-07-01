@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ProgressPage from "@/components/pages/ProgressPage";
 import TasksPage from "@/components/pages/TasksPage";
@@ -12,15 +12,15 @@ import ProjectsPage from "@/components/pages/ProjectsPage";
 import Layout from "@/components/organisms/Layout";
 
 function App() {
-  return (
-    <Router>
+return (
+    <BrowserRouter>
       <div className="min-h-screen bg-background text-slate-100">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/app" element={<Layout />}>
-<Route index element={<DashboardPage />} />
+            <Route index element={<DashboardPage />} />
             <Route path="tasks" element={<TasksPage />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="progress" element={<ProgressPage />} />
@@ -40,7 +40,7 @@ function App() {
           theme="dark"
         />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
