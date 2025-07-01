@@ -9,6 +9,7 @@ import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import Empty from '@/components/ui/Empty';
 import { taskService } from '@/services/api/taskService';
+import { taskGenerationRuleService } from '@/services/api/taskGenerationRuleService';
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -63,38 +64,116 @@ const TasksPage = () => {
     }
   };
   
-  const generateAITasks = async () => {
+const generateAITasks = async () => {
     try {
       setLoading(true);
+      
+      // Simulate AI processing time
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const newTasks = [
-        {
-          title: 'Create landing page wireframes',
-          description: 'Design the key sections and user flow for your product landing page',
-          xpValue: 25,
-          status: 'todo',
-          priority: 'high',
-          dueDate: new Date(Date.now() + 86400000).toISOString()
-        },
-        {
-          title: 'Research competitor pricing',
-          description: 'Analyze 5 similar products to establish competitive pricing strategy',
-          xpValue: 15,
-          status: 'todo',
-          priority: 'medium',
-          dueDate: new Date(Date.now() + 172800000).toISOString()
-        }
-      ];
+      // Analyze user's existing tasks to understand patterns
+      const completedTasks = tasks.filter(task => task.status === 'done');
+      const userLevel = Math.floor(completedTasks.length / 5) + 1; // Level based on completed tasks
+      const avgXP = completedTasks.length > 0 
+        ? completedTasks.reduce((sum, task) => sum + (task.xpValue || 0), 0) / completedTasks.length 
+        : 15;
       
-      for (const task of newTasks) {
-        await taskService.create(task);
+      // Load generation rules from database
+      const generationRules = await taskGenerationRuleService.getAll();
+      
+      // Define intelligent task templates based on user progress
+      const taskTemplates = {
+        foundational: [
+          {
+            title: 'Define your minimum viable product (MVP)',
+            description: 'Outline the core features that solve your target customer\'s primary problem',
+            xpValue: Math.max(20, Math.floor(avgXP * 1.2)),
+            priority: 'high',
+            category: 'product'
+          },
+          {
+            title: 'Create user persona profiles',
+            description: 'Research and document 2-3 detailed personas representing your ideal customers',
+            xpValue: Math.max(15, Math.floor(avgXP * 1.0)),
+            priority: 'medium',
+            category: 'research'
+          }
+        ],
+        growth: [
+          {
+            title: 'Develop content marketing strategy',
+            description: 'Plan 4 weeks of valuable content that addresses your audience\'s pain points',
+            xpValue: Math.max(25, Math.floor(avgXP * 1.5)),
+            priority: 'high',
+            category: 'marketing'
+          },
+          {
+            title: 'Set up analytics and tracking',
+            description: 'Implement tools to measure user behavior and conversion metrics',
+            xpValue: Math.max(20, Math.floor(avgXP * 1.3)),
+            priority: 'medium',
+            category: 'analytics'
+          }
+        ],
+        advanced: [
+          {
+            title: 'Build strategic partnerships',
+            description: 'Identify and reach out to 3 potential partners that could accelerate growth',
+            xpValue: Math.max(30, Math.floor(avgXP * 1.8)),
+            priority: 'high',
+            category: 'business'
+          },
+          {
+            title: 'Optimize conversion funnel',
+            description: 'Analyze and improve each step of your customer acquisition process',
+            xpValue: Math.max(35, Math.floor(avgXP * 2.0)),
+            priority: 'medium',
+            category: 'optimization'
+          }
+        ]
+      };
+      
+      // Select appropriate tasks based on user level
+      let selectedTemplates;
+      if (userLevel <= 2) {
+        selectedTemplates = taskTemplates.foundational;
+      } else if (userLevel <= 5) {
+        selectedTemplates = taskTemplates.growth;
+      } else {
+        selectedTemplates = taskTemplates.advanced;
+      }
+      
+      // Generate 2-3 personalized tasks
+      const tasksToGenerate = selectedTemplates.slice(0, Math.min(2, selectedTemplates.length));
+      const generatedTasks = [];
+      
+      for (const template of tasksToGenerate) {
+        const task = {
+          title: template.title,
+          description: template.description,
+          xpValue: template.xpValue,
+          status: 'todo',
+          priority: template.priority,
+          dueDate: new Date(Date.now() + (Math.random() * 3 + 1) * 86400000).toISOString() // 1-4 days
+        };
+        
+        const createdTask = await taskService.create(task);
+        if (createdTask) {
+          generatedTasks.push(createdTask);
+        }
       }
       
       await loadTasks();
-      toast.success('🎉 AI generated 2 new personalized tasks!');
+      
+      if (generatedTasks.length > 0) {
+        toast.success(`🎉 AI generated ${generatedTasks.length} personalized tasks for level ${userLevel}!`);
+      } else {
+        toast.error('Failed to generate tasks. Please try again.');
+      }
     } catch (err) {
+      console.error('Task generation error:', err);
       setError('Failed to generate tasks');
+      toast.error('Failed to generate AI tasks. Please try again.');
     } finally {
       setLoading(false);
     }
