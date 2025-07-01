@@ -32,7 +32,8 @@
 
   .glass-effect {
     background: rgba(30, 41, 59, 0.3);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -40,15 +41,60 @@
     box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
   }
 
-  .btn-glow:hover {
+.btn-glow:hover {
     box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
   }
-}
+  .responsive-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 
+  .responsive-grid-3 {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  @media (min-width: 768px) {
+    .responsive-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .responsive-sidebar {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  @media (max-width: 1023px) {
+    .responsive-sidebar {
+      position: fixed;
+      z-index: 50;
+      transform: translateX(-100%);
+    }
+    
+    .responsive-sidebar.open {
+      transform: translateX(0);
+    }
+  }
+
+  .mobile-safe-area {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .backdrop-blur-support {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  @supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+    .backdrop-blur-support {
+      background-color: rgba(30, 41, 59, 0.8);
+    }
+  }
 .Toastify__toast-container {
   z-index: 9999;
 }
-
 .Toastify__toast {
   background: #1e293b;
   color: #f8fafc;
