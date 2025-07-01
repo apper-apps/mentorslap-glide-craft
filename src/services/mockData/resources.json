@@ -1,0 +1,124 @@
+{
+  "mockData": [
+    {
+      "Id": 1,
+      "title": "The Solo Founder's Guide to Time Management",
+      "description": "Learn how successful entrepreneurs manage their time when wearing multiple hats. Practical strategies for prioritizing tasks and avoiding burnout.",
+      "category": "productivity",
+      "author": "Sarah Chen",
+      "readTime": 8,
+      "tags": ["time-management", "productivity", "solo-founder", "balance"],
+      "featured": true
+    },
+    {
+      "Id": 2,
+      "title": "Building Your First MVP: A Step-by-Step Framework",
+      "description": "From idea to launch in 30 days. This comprehensive guide walks you through creating a minimum viable product that customers actually want.",
+      "category": "founding",
+      "author": "Marcus Rodriguez",
+      "readTime": 12,
+      "tags": ["mvp", "product-development", "startup", "validation"],
+      "featured": true
+    },
+    {
+      "Id": 3,
+      "title": "Growth Hacking Tactics That Actually Work in 2024",
+      "description": "Forget the outdated tricks. Here are 15 proven growth strategies that modern entrepreneurs are using to scale their businesses.",
+      "category": "growth",
+      "author": "Alex Kim",
+      "readTime": 10,
+      "tags": ["growth-hacking", "marketing", "scaling", "tactics"],
+      "featured": false
+    },
+    {
+      "Id": 4,
+      "title": "The Productivity Stack: Essential Tools for Entrepreneurs",
+      "description": "Curated list of 20+ tools that can 10x your productivity. From project management to automation, we've tested them all.",
+      "category": "tools",
+      "author": "Emma Thompson",
+      "readTime": 6,
+      "tags": ["tools", "productivity", "automation", "efficiency"],
+      "featured": false
+    },
+    {
+      "Id": 5,
+      "title": "Content Marketing for Solo Entrepreneurs",
+      "description": "How to create compelling content that builds your audience and drives sales, even when you're a team of one.",
+      "category": "marketing",
+      "author": "David Park",
+      "readTime": 9,
+      "tags": ["content-marketing", "solo-founder", "audience-building", "sales"],
+      "featured": false
+    },
+    {
+      "Id": 6,
+      "title": "Overcoming Entrepreneur Anxiety and Imposter Syndrome",
+      "description": "Mental health strategies for dealing with the psychological challenges of building a business alone.",
+      "category": "founding",
+      "author": "Dr. Lisa Williams",
+      "readTime": 7,
+      "tags": ["mental-health", "anxiety", "imposter-syndrome", "mindset"],
+      "featured": false
+    },
+    {
+      "Id": 7,
+      "title": "The Art of Saying No: Boundaries for Busy Founders",
+      "description": "Learn when and how to say no to opportunities, meetings, and requests that don't align with your goals.",
+      "category": "productivity",
+      "author": "Michael Chang",
+      "readTime": 5,
+      "tags": ["boundaries", "focus", "decision-making", "priorities"],
+      "featured": false
+    },
+    {
+      "Id": 8,
+      "title": "Bootstrapping vs. Fundraising: Making the Right Choice",
+      "description": "A detailed comparison of self-funding versus seeking investment, with real case studies from successful entrepreneurs.",
+      "category": "founding",
+      "author": "Rachel Adams",
+      "readTime": 11,
+      "tags": ["bootstrapping", "fundraising", "investment", "funding"],
+      "featured": false
+    },
+    {
+      "Id": 9,
+      "title": "Email Marketing Automation for Small Businesses",
+      "description": "Set up email sequences that nurture leads and convert customers while you sleep. Includes templates and workflows.",
+      "category": "marketing",
+      "author": "James Wilson",
+      "readTime": 8,
+      "tags": ["email-marketing", "automation", "lead-nurturing", "conversion"],
+      "featured": false
+    },
+    {
+      "Id": 10,
+      "title": "Building Systems That Scale: Process Documentation Guide",
+      "description": "Create repeatable processes and systems that allow your business to grow without constant hands-on management.",
+      "category": "growth",
+      "author": "Anna Singh",
+      "readTime": 9,
+      "tags": ["systems", "processes", "scaling", "documentation"],
+      "featured": false
+    },
+    {
+      "Id": 11,
+      "title": "Customer Research Methods for Solo Founders",
+      "description": "Practical techniques for understanding your customers when you don't have a research team or big budget.",
+      "category": "founding",
+      "author": "Carlos Lopez",
+      "readTime": 7,
+      "tags": ["customer-research", "validation", "user-interviews", "feedback"],
+      "featured": false
+    },
+    {
+      "Id": 12,
+      "title": "The 4-Hour Workday: Extreme Productivity Techniques",
+      "description": "Advanced time management and productivity strategies used by ultra-successful entrepreneurs to maximize output.",
+      "category": "productivity",
+      "author": "Sophie Martin",
+      "readTime": 10,
+      "tags": ["extreme-productivity", "time-management", "efficiency", "output"],
+      "featured": false
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "mockData": [
+    {
+      "Id": 1,
+      "title": "Define MVP features",
+      "description": "List out the core features needed for your minimum viable product launch",
+      "xpValue": 30,
+      "status": "done",
+      "priority": "high",
+      "dueDate": "2024-01-15T10:00:00Z",
+      "userId": "user1",
+      "column": "done"
+    },
+    {
+      "Id": 2,
+      "title": "Research target audience",
+      "description": "Conduct interviews with 5 potential customers to validate your idea",
+      "xpValue": 25,
+      "status": "done",
+      "priority": "high",
+      "dueDate": "2024-01-16T14:00:00Z",
+      "userId": "user1",
+      "column": "done"
+    },
+    {
+      "Id": 3,
+      "title": "Create landing page mockup",
+      "description": "Design a simple landing page to explain your product value proposition",
+      "xpValue": 20,
+      "status": "in_progress",
+      "priority": "medium",
+      "dueDate": "2024-01-18T09:00:00Z",
+      "userId": "user1",
+      "column": "in_progress"
+    },
+    {
+      "Id": 4,
+      "title": "Set up development environment",
+      "description": "Install necessary tools and frameworks for building your product",
+      "xpValue": 15,
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2024-01-20T11:00:00Z",
+      "userId": "user1",
+      "column": "todo"
+    },
+    {
+      "Id": 5,
+      "title": "Write product pitch deck",
+      "description": "Create a 10-slide presentation explaining your business idea and market opportunity",
+      "xpValue": 35,
+      "status": "todo",
+      "priority": "high",
+      "dueDate": "2024-01-22T16:00:00Z",
+      "userId": "user1",
+      "column": "todo"
+    },
+    {
+      "Id": 6,
+      "title": "Validate pricing strategy",
+      "description": "Research competitor pricing and survey potential customers about willingness to pay",
+      "xpValue": 25,
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2024-01-24T13:00:00Z",
+      "userId": "user1",
+      "column": "todo"
+    },
+    {
+      "Id": 7,
+      "title": "Build user authentication",
+      "description": "Implement login and registration functionality for your application",
+      "xpValue": 40,
+      "status": "todo",
+      "priority": "low",
+      "dueDate": "2024-01-26T15:00:00Z",
+      "userId": "user1",
+      "column": "todo"
+    },
+    {
+      "Id": 8,
+      "title": "Design app logo and branding",
+      "description": "Create a professional logo and establish brand colors and typography",
+      "xpValue": 20,
+      "status": "in_progress",
+      "priority": "low",
+      "dueDate": "2024-01-19T12:00:00Z",
+      "userId": "user1",
+      "column": "in_progress"
+    }
+  ]
+}
