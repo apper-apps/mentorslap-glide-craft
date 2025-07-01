@@ -1,4 +1,4 @@
-import { mockData } from '@/services/mockData/tasks.json';
+import mockData from '@/services/mockData/tasks.json';
 
 class TaskService {
   constructor() {

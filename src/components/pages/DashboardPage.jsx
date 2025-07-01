@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import ApperIcon from '@/components/ApperIcon';
 import Card from '@/components/atoms/Card';
 import Button from '@/components/atoms/Button';
@@ -34,12 +35,14 @@ const DashboardPage = () => {
     loadTasks();
   }, []);
   
-  const handleCompleteTask = async (taskId) => {
+const handleCompleteTask = async (taskId) => {
     try {
       await taskService.update(taskId, { status: 'done' });
       await loadTasks();
+      toast.success('Task completed! Great work! 🎉');
     } catch (err) {
       setError('Failed to update task');
+      toast.error('Failed to complete task. Please try again.');
     }
   };
   
@@ -47,8 +50,10 @@ const DashboardPage = () => {
     try {
       await taskService.delete(taskId);
       await loadTasks();
+      toast.success('Task deleted successfully');
     } catch (err) {
       setError('Failed to delete task');
+      toast.error('Failed to delete task. Please try again.');
     }
   };
   
