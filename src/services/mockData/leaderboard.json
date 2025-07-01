@@ -1,0 +1,102 @@
+[
+  {
+    "Id": 1,
+    "userId": "user1",
+    "score": 1250,
+    "badgeCount": 6,
+    "tasksCompleted": 25,
+    "streak": 12,
+    "level": 6,
+    "lastActive": "2024-01-15T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "userId": "user2",
+    "score": 980,
+    "badgeCount": 4,
+    "tasksCompleted": 18,
+    "streak": 8,
+    "level": 4,
+    "lastActive": "2024-01-15T09:15:00Z"
+  },
+  {
+    "Id": 3,
+    "userId": "user3",
+    "score": 875,
+    "badgeCount": 5,
+    "tasksCompleted": 22,
+    "streak": 5,
+    "level": 4,
+    "lastActive": "2024-01-15T08:45:00Z"
+  },
+  {
+    "Id": 4,
+    "userId": "user4",
+    "score": 720,
+    "badgeCount": 3,
+    "tasksCompleted": 15,
+    "streak": 6,
+    "level": 3,
+    "lastActive": "2024-01-14T22:30:00Z"
+  },
+  {
+    "Id": 5,
+    "userId": "user5",
+    "score": 650,
+    "badgeCount": 4,
+    "tasksCompleted": 19,
+    "streak": 3,
+    "level": 3,
+    "lastActive": "2024-01-14T19:20:00Z"
+  },
+  {
+    "Id": 6,
+    "userId": "user6",
+    "score": 590,
+    "badgeCount": 2,
+    "tasksCompleted": 12,
+    "streak": 4,
+    "level": 2,
+    "lastActive": "2024-01-14T16:10:00Z"
+  },
+  {
+    "Id": 7,
+    "userId": "user7",
+    "score": 480,
+    "badgeCount": 3,
+    "tasksCompleted": 16,
+    "streak": 2,
+    "level": 2,
+    "lastActive": "2024-01-14T14:50:00Z"
+  },
+  {
+    "Id": 8,
+    "userId": "user8",
+    "score": 425,
+    "badgeCount": 2,
+    "tasksCompleted": 11,
+    "streak": 7,
+    "level": 2,
+    "lastActive": "2024-01-14T12:30:00Z"
+  },
+  {
+    "Id": 9,
+    "userId": "user9",
+    "score": 380,
+    "badgeCount": 1,
+    "tasksCompleted": 9,
+    "streak": 1,
+    "level": 1,
+    "lastActive": "2024-01-14T11:15:00Z"
+  },
+  {
+    "Id": 10,
+    "userId": "user10",
+    "score": 320,
+    "badgeCount": 2,
+    "tasksCompleted": 8,
+    "streak": 3,
+    "level": 1,
+    "lastActive": "2024-01-14T09:40:00Z"
+  }
+]

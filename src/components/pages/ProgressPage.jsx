@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
-import Card from '@/components/atoms/Card';
-import Badge from '@/components/atoms/Badge';
-import ProgressBar from '@/components/atoms/ProgressBar';
-import XPDisplay from '@/components/molecules/XPDisplay';
-import Loading from '@/components/ui/Loading';
-import Error from '@/components/ui/Error';
-import { taskService } from '@/services/api/taskService';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
+import Card from "@/components/atoms/Card";
+import ProgressBar from "@/components/atoms/ProgressBar";
+import XPDisplay from "@/components/molecules/XPDisplay";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import { taskService } from "@/services/api/taskService";
 
 const ProgressPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -175,57 +175,54 @@ const ProgressPage = () => {
                 </motion.div>
               ))}
             </div>
-          </Card>
+</Card>
           
           {/* Achievements */}
           <Card className="p-6">
             <h3 className="text-lg font-semibold text-slate-100 mb-4">Achievements</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {achievements.map((achievement, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {achievements.map((achievement) => (
                 <motion.div
                   key={achievement.id}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                  transition={{ duration: 0.3 }}
+                  className={`p-4 rounded-lg border transition-all ${
                     achievement.unlocked
-                      ? 'bg-gradient-to-br from-accent-500/20 to-accent-600/20 border-accent-500/30'
-                      : 'bg-slate-700/50 border-slate-600'
+                      ? 'bg-gradient-to-br from-primary-900/50 to-secondary-900/50 border-primary-500/30'
+                      : 'bg-slate-800/50 border-slate-700'
                   }`}
                 >
                   <div className="flex items-start space-x-3">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      achievement.unlocked
-                        ? 'bg-gradient-to-br from-accent-500 to-accent-600'
-                        : 'bg-slate-600'
+                    <div className={`p-2 rounded-lg ${
+                      achievement.unlocked 
+                        ? 'bg-primary-500/20 text-primary-400' 
+                        : 'bg-slate-700 text-slate-500'
                     }`}>
-                      <ApperIcon 
-                        name={achievement.icon} 
-                        size={20} 
-                        className={achievement.unlocked ? 'text-white' : 'text-slate-400'} 
-                      />
+                      <ApperIcon name={achievement.icon} size={20} />
                     </div>
-                    <div className="flex-1 space-y-1">
-                      <div className="flex items-center space-x-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center space-x-2 mb-1">
                         <h4 className={`font-semibold ${
                           achievement.unlocked ? 'text-slate-100' : 'text-slate-400'
                         }`}>
                           {achievement.title}
                         </h4>
                         {achievement.unlocked && (
-                          <Badge variant="accent" size="sm">Unlocked</Badge>
+                          <Badge variant="success" size="sm">
+                            Unlocked
+                          </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-slate-400">{achievement.description}</p>
-                      {!achievement.unlocked && (
-                        <ProgressBar
-                          value={achievement.progress}
-                          max={achievement.total}
-                          size="sm"
-                          variant="primary"
-                          className="mt-2"
-                        />
-                      )}
+                      <p className="text-sm text-slate-400 mb-2">
+                        {achievement.description}
+                      </p>
+                      <ProgressBar
+                        progress={achievement.progress}
+                        total={achievement.total}
+                        size="sm"
+                        showText={true}
+                      />
                     </div>
                   </div>
                 </motion.div>

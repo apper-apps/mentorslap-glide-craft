@@ -1,0 +1,65 @@
+[
+  {
+    "Id": 1,
+    "name": "First Steps",
+    "description": "Complete your first task",
+    "icon": "Target",
+    "rarity": "common",
+    "requirement": "Complete 1 task",
+    "category": "milestone"
+  },
+  {
+    "Id": 2,
+    "name": "Getting Momentum",
+    "description": "Complete 5 tasks",
+    "icon": "Zap",
+    "rarity": "common",
+    "requirement": "Complete 5 tasks",
+    "category": "milestone"
+  },
+  {
+    "Id": 3,
+    "name": "Task Master",
+    "description": "Complete 20 tasks",
+    "icon": "Award",
+    "rarity": "rare",
+    "requirement": "Complete 20 tasks",
+    "category": "milestone"
+  },
+  {
+    "Id": 4,
+    "name": "Streak Master",
+    "description": "Complete 3 tasks in a row",
+    "icon": "Flame",
+    "rarity": "epic",
+    "requirement": "Complete 3 consecutive tasks",
+    "category": "streak"
+  },
+  {
+    "Id": 5,
+    "name": "Productive",
+    "description": "Complete 10 tasks",
+    "icon": "CheckCircle",
+    "rarity": "uncommon",
+    "requirement": "Complete 10 tasks",
+    "category": "milestone"
+  },
+  {
+    "Id": 6,
+    "name": "XP Hunter",
+    "description": "Earn 500 total XP",
+    "icon": "Star",
+    "rarity": "rare",
+    "requirement": "Earn 500 XP",
+    "category": "experience"
+  },
+  {
+    "Id": 7,
+    "name": "XP Champion",
+    "description": "Earn 1000 total XP",
+    "icon": "Crown",
+    "rarity": "legendary",
+    "requirement": "Earn 1000 XP",
+    "category": "experience"
+  }
+]

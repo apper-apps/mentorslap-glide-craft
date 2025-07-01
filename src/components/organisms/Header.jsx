@@ -8,11 +8,13 @@ const Header = ({ isAppHeader = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   
-  const navItems = isAppHeader 
+const navItems = isAppHeader 
     ? [
         { path: '/app', label: 'Dashboard', icon: 'LayoutDashboard' },
         { path: '/app/tasks', label: 'Tasks', icon: 'CheckSquare' },
         { path: '/app/progress', label: 'Progress', icon: 'TrendingUp' },
+        { path: '/app/badges', label: 'Badges', icon: 'Award' },
+        { path: '/app/leaderboard', label: 'Leaderboard', icon: 'Trophy' },
         { path: '/app/resources', label: 'Resources', icon: 'BookOpen' }
       ]
     : [
