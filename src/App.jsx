@@ -1,14 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import Layout from '@/components/organisms/Layout';
-import LandingPage from '@/components/pages/LandingPage';
-import OnboardingPage from '@/components/pages/OnboardingPage';
-import DashboardPage from '@/components/pages/DashboardPage';
-import TasksPage from '@/components/pages/TasksPage';
-import ProgressPage from '@/components/pages/ProgressPage';
-import ResourcesPage from '@/components/pages/ResourcesPage';
-import PricingPage from '@/components/pages/PricingPage';
+import React from "react";
+import { Route, Router, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import ProgressPage from "@/components/pages/ProgressPage";
+import TasksPage from "@/components/pages/TasksPage";
+import DashboardPage from "@/components/pages/DashboardPage";
+import PricingPage from "@/components/pages/PricingPage";
+import OnboardingPage from "@/components/pages/OnboardingPage";
+import LandingPage from "@/components/pages/LandingPage";
+import ResourcesPage from "@/components/pages/ResourcesPage";
+import ProjectsPage from "@/components/pages/ProjectsPage";
+import Layout from "@/components/organisms/Layout";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/app" element={<Layout />}>
-            <Route index element={<DashboardPage />} />
+<Route index element={<DashboardPage />} />
             <Route path="tasks" element={<TasksPage />} />
+            <Route path="projects" element={<ProjectsPage />} />
             <Route path="progress" element={<ProgressPage />} />
             <Route path="resources" element={<ResourcesPage />} />
           </Route>

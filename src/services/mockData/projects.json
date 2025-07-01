@@ -1,0 +1,28 @@
+{
+  "mockData": [
+    {
+      "Id": 1,
+      "title": "E-commerce Platform MVP",
+      "description": "Build a minimum viable product for an online marketplace targeting small businesses. Focus on core features like product listings, user authentication, and basic payment processing.",
+      "status": "active",
+      "createdAt": "2024-01-10T08:00:00Z",
+      "updatedAt": "2024-01-15T14:30:00Z"
+    },
+    {
+      "Id": 2,
+      "title": "Personal Fitness App",
+      "description": "Develop a mobile-first web application for tracking workouts, nutrition, and progress. Include social features for motivation and accountability.",
+      "status": "active",
+      "createdAt": "2024-01-05T09:15:00Z",
+      "updatedAt": "2024-01-16T16:45:00Z"
+    },
+    {
+      "Id": 3,
+      "title": "Smart Home Dashboard",
+      "description": "Create a centralized dashboard for managing IoT devices in the home. Started as a learning project but putting on hold to focus on other priorities.",
+      "status": "on-hold",
+      "createdAt": "2023-12-20T11:00:00Z",
+      "updatedAt": "2024-01-08T10:20:00Z"
+    }
+  ]
+}

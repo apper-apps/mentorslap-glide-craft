@@ -1,0 +1,44 @@
+{
+  "mockData": [
+    {
+      "Id": 1,
+      "projectId": 1,
+      "content": "Started working on the e-commerce platform today. The initial setup went smoothly, and I've decided to use React with a Node.js backend. The authentication system is my first priority since everything else will depend on user management.\n\nI'm excited about this project because it combines my technical skills with a real business need. The goal is to create something that small businesses can actually use to sell their products online.",
+      "date": "2024-01-10T18:30:00Z",
+      "createdAt": "2024-01-10T18:30:00Z",
+      "updatedAt": "2024-01-10T18:30:00Z"
+    },
+    {
+      "Id": 2,
+      "projectId": 1,
+      "content": "Made great progress on the authentication system. JWT implementation is working well, and I've added password hashing with bcrypt. The user registration and login flows are complete.\n\nNext up is the product catalog. I'm thinking about the data structure and how to make the search functionality fast and intuitive. Planning to use Elasticsearch for search if the basic implementation isn't sufficient.",
+      "date": "2024-01-16T20:15:00Z",
+      "createdAt": "2024-01-16T20:15:00Z",
+      "updatedAt": "2024-01-16T20:15:00Z"
+    },
+    {
+      "Id": 3,
+      "projectId": 2,
+      "content": "Launched the fitness app project! This one is personal - I want to build something I'd actually use for my own workouts. The idea is to make tracking as frictionless as possible.\n\nI've sketched out the core features: workout logging, progress tracking, and some basic nutrition tracking. The social aspect will come later, but I think it could be a key differentiator.",
+      "date": "2024-01-05T19:45:00Z",
+      "createdAt": "2024-01-05T19:45:00Z",
+      "updatedAt": "2024-01-05T19:45:00Z"
+    },
+    {
+      "Id": 4,
+      "projectId": 2,
+      "content": "The workout tracking interface is coming along nicely. I focused on making it mobile-first since that's how most people will use it. The form for logging exercises is intuitive, and the progress charts are looking good.\n\nI'm using Chart.js for the visualizations. It's lightweight and does exactly what I need. The data model for workouts is flexible enough to handle different types of exercises.",
+      "date": "2024-01-18T21:00:00Z",
+      "createdAt": "2024-01-18T21:00:00Z",
+      "updatedAt": "2024-01-18T21:00:00Z"
+    },
+    {
+      "Id": 5,
+      "projectId": 3,
+      "content": "Did some research on smart home device APIs today. The landscape is more fragmented than I expected, but there are some good options. Philips Hue has a solid API, and the Nest integration looks promising.\n\nI'm putting this project on hold for now to focus on the e-commerce platform, but I've documented everything I learned. When I come back to this, I'll have a good foundation to build on.",
+      "date": "2024-01-08T17:30:00Z",
+      "createdAt": "2024-01-08T17:30:00Z",
+      "updatedAt": "2024-01-08T17:30:00Z"
+    }
+  ]
+}
